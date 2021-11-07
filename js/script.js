@@ -29,33 +29,18 @@ printMessage('Twój ruch to: ' + playerMove);
 
 function displayResult(argComputerMove, argPlayerMove) {
     console.log('moves:', argComputerMove, argPlayerMove);
-    if (argComputerMove == 'kamień' && argPlayerMove == 'kamień') {
+    if ((argComputerMove == 'kamień' && argPlayerMove == 'kamień') || (argComputerMove == 'papier' && argPlayerMove == 'papier') ||
+        (argComputerMove == 'nożyce' && argPlayerMove == 'nożyce')) {
         return 'Remis!';
-    } else if (argComputerMove == 'kamień' && argPlayerMove == 'papier') {
+    } else if ((argComputerMove == 'kamień' && argPlayerMove == 'papier') || (argComputerMove == 'papier' && argPlayerMove == 'nożyce') ||
+        (argComputerMove == 'nożyce' && argPlayerMove == 'kamień')) {
         return 'Wygrałeś!';
-    } else if (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') {
+    } else if ((argComputerMove == 'kamień' && argPlayerMove == 'nożyce')  || (argComputerMove == 'papier' && argPlayerMove == 'kamień') ||
+        (argComputerMove == 'nożyce' && argPlayerMove == 'papier')) {
         return 'Przegrałeś!';
-    } else if (argComputerMove == 'kamień' && argPlayerMove == 'nieznany ruch') {
-        return 'Oszukujesz!';
-    } else if (argComputerMove == 'papier' && argPlayerMove == 'kamień') {
-        return 'Przegrałeś!';
-    } else if (argComputerMove == 'papier' && argPlayerMove == 'papier') {
-        return 'Remis!';
-    } else if (argComputerMove == 'papier' && argPlayerMove == 'nożyce') {
-        return 'Wygrałeś!';
-    } else if (argComputerMove == 'papier' && argPlayerMove == 'nieznany ruch') {
-        return 'Oszukujesz!';
-    } else if (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') {
-        return 'Wygrałeś!';
-    } else if (argComputerMove == 'nożyce' && argPlayerMove == 'papier') {
-        return 'Przegrałeś!';
-    } else if (argComputerMove == 'nożyce' && argPlayerMove == 'nożyce') {
-        return 'Remis!';
-    } else if (argComputerMove == 'nożyce' && argPlayerMove == 'nieznany ruch') {
-        return 'Oszukujesz!';
-    }
+    } else {return 'Oszukujesz'}
 }
 
-let Result = displayResult(computerMove, playerMove)
+let result = displayResult(computerMove, playerMove)
 
-printMessage (Result);
+printMessage (result);
