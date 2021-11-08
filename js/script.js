@@ -23,7 +23,6 @@ function playGame(playerInput) {
 
     printMessage('Mój ruch to: ' + computerMove);
 
-    /*let playerInput = prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.');*/
 
     console.log('Gracz wpisał: ' + playerInput);
 
@@ -36,15 +35,21 @@ function playGame(playerInput) {
         if ((argComputerMove == 'kamień' && argPlayerMove == 'kamień')
             || (argComputerMove == 'papier' && argPlayerMove == 'papier')
             || (argComputerMove == 'nożyce' && argPlayerMove == 'nożyce')
-        ){return 'Remis!';}
-        else if ((argComputerMove == 'kamień' && argPlayerMove == 'papier')
+        ) {
+            return 'Remis!';
+        } else if ((argComputerMove == 'kamień' && argPlayerMove == 'papier')
             || (argComputerMove == 'papier' && argPlayerMove == 'nożyce')
             || (argComputerMove == 'nożyce' && argPlayerMove == 'kamień')
-        ){return 'Wygrałeś!';}
-        else if ((argComputerMove == 'kamień' && argPlayerMove == 'nożyce')
+        ) {
+            playerScore++;
+            return 'Wygrałeś!';
+        } else if ((argComputerMove == 'kamień' && argPlayerMove == 'nożyce')
             || (argComputerMove == 'papier' && argPlayerMove == 'kamień')
             || (argComputerMove == 'nożyce' && argPlayerMove == 'papier')
-        ) {return 'Przegrałeś!';}
+        ) {
+            computerScore++;
+            return 'Przegrałeś!';
+        }
         else {return 'Oszukujesz'}
     }
 
@@ -53,11 +58,27 @@ function playGame(playerInput) {
     printMessage(result);
 }
 document.getElementById('play-rock').addEventListener('click', function(){
-  playGame(1);
+    playGame(1);
+    updateScore();
 });
 document.getElementById('play-papier').addEventListener('click', function(){
-  playGame(2);
+    playGame(2);
+    updateScore();
 });
 document.getElementById('play-scissors').addEventListener('click', function(){
-  playGame(3);
+    playGame(3);
+    updateScore();
 });
+
+const scores = document.getElementById('scores');
+
+let playerScore = 0;
+let computerScore = 0;
+
+function updateScore() {
+    const playerScorePara = document.getElementById('playerScore');
+    const computerScorePara = document.getElementById('computerScore');
+
+    playerScorePara.textContent = `Player: ${playerScore}`;
+    computerScorePara.textContent = `Computer: ${computerScore}`;
+}
