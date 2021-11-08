@@ -1,8 +1,9 @@
+ 
 function playGame(playerInput) {
     
     clearMessages()
     
-    let randomNumber = Math.floor(Math.random() * 3 + 1);
+    let randomNumber = Math.floor(Math.random() * 5 + 1);
 
     console.log('Wylosowana liczba to: ' + randomNumber);
 
@@ -13,10 +14,10 @@ function playGame(playerInput) {
             return 'papier';
         } else if (argMoveId == 3) {
             return 'nożyce';
+        } else {
+            return 'none';
         }
 
-        printMessage('Nie znam ruchu o id ' + argMoveId + '.');
-        return 'nieznany ruch';
     }
 
     let computerMove = getMoveName(randomNumber);
@@ -40,6 +41,9 @@ function playGame(playerInput) {
         } else if ((argComputerMove == 'kamień' && argPlayerMove == 'papier')
             || (argComputerMove == 'papier' && argPlayerMove == 'nożyce')
             || (argComputerMove == 'nożyce' && argPlayerMove == 'kamień')
+            || (argComputerMove == 'none' && argPlayerMove == 'papier')
+            || (argComputerMove == 'none' && argPlayerMove == 'nożyce')
+            || (argComputerMove == 'none' && argPlayerMove == 'kamień')
         ) {
             playerScore++;
             return 'Wygrałeś!';
@@ -50,22 +54,25 @@ function playGame(playerInput) {
             computerScore++;
             return 'Przegrałeś!';
         }
-        else {return 'Oszukujesz'}
+        else { return 'Oszukujesz' }
     }
 
     let result = displayResult(computerMove, playerMove)
+    console.log('Result ', result);
 
     printMessage(result);
 }
-document.getElementById('play-rock').addEventListener('click', function(){
-    playGame(1);
-    updateScore();
-});
-document.getElementById('play-papier').addEventListener('click', function(){
+for (let i = 0; i < 10000; i++) {
+    document.getElementById('play-rock').addEventListener('click', function () {
+        playGame(1);
+        updateScore();
+    });
+}
+document.getElementById('play-papier').addEventListener('click', function () {
     playGame(2);
     updateScore();
 });
-document.getElementById('play-scissors').addEventListener('click', function(){
+document.getElementById('play-scissors').addEventListener('click', function () {
     playGame(3);
     updateScore();
 });
